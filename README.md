@@ -10,23 +10,52 @@ API backend para gerenciamento de atividades e acompanhamento do progresso de cr
 
 ## 📚 Documentação da API
 
-### 🔐 Autenticação
+### 🔐 Autenticação e Registro
 
-A maioria dos endpoints requer autenticação via token JWT. Inclua o token no header:
+Para usar a API, primeiro você precisa:
+1. Criar uma conta de responsável
+2. Fazer login para obter o token JWT
+3. Usar o token nas requisições subsequentes
+
+#### Registro e Login
+- **POST** `/responsaveis` - Registra novo responsável
+  ```json
+  {
+    "nome": "Nome do Responsável",
+    "telefone": "(11) 99999-9999",
+    "email": "responsavel@example.com",
+    "senha": "senha123"
+  }
+  ```
+- **POST** `/auth/login` - Login do usuário
+  ```json
+  {
+    "email": "responsavel@example.com",
+    "senha": "senha123"
+  }
+  ```
+  Resposta:
+  ```json
+  {
+    "token": "seu_token_jwt",
+    "usuario": {
+      "id": 1,
+      "nome": "Nome do Responsável",
+      "email": "responsavel@example.com"
+    }
+  }
+  ```
+
+### 🔒 Autenticação
+
+Após o login, inclua o token JWT no header de todas as requisições:
 ```
 Authorization: Bearer seu_token_jwt
 ```
 
 ### 🛣️ Rotas da API
 
-#### Auth
-- **POST** `/auth/login` - Login do usuário
-  ```json
-  {
-    "email": "seu@email.com",
-    "senha": "sua_senha"
-  }
-  ```
+#### Gerenciamento de Sessão
 - **GET** `/auth/session` - Obtém sessão atual
 - **PUT** `/auth/password` - Atualiza senha
   ```json
@@ -38,15 +67,6 @@ Authorization: Bearer seu_token_jwt
 - **DELETE** `/auth/logout` - Realiza logout
 
 #### Responsável
-- **POST** `/responsaveis` - Cadastra novo responsável
-  ```json
-  {
-    "nome": "Nome do Responsável",
-    "telefone": "(11) 99999-9999",
-    "email": "responsavel@example.com",
-    "senha": "senha123"
-  }
-  ```
 - **GET** `/responsaveis/me` - Busca perfil do responsável
 - **PUT** `/responsaveis/me` - Atualiza dados do responsável
   ```json

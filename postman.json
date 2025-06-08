@@ -20,7 +20,28 @@
         "name": "Auth",
         "item": [
           {
-            "name": "Login",
+            "name": "1. Registrar Conta",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/responsaveis",
+                "host": ["{{base_url}}"],
+                "path": ["responsaveis"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"nome\": \"Nome do Responsável\",\n    \"telefone\": \"(11) 99999-9999\",\n    \"email\": \"responsavel@example.com\",\n    \"senha\": \"senha123\"\n}"
+              }
+            }
+          },
+          {
+            "name": "2. Login",
             "request": {
               "method": "POST",
               "header": [
@@ -36,12 +57,12 @@
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"email\": \"your-email@example.com\",\n    \"senha\": \"sua_senha\"\n}"
+                "raw": "{\n    \"email\": \"responsavel@example.com\",\n    \"senha\": \"senha123\"\n}"
               }
             }
           },
           {
-            "name": "Get Session",
+            "name": "3. Get Session",
             "request": {
               "method": "GET",
               "header": [
@@ -104,27 +125,6 @@
       {
         "name": "Responsável",
         "item": [
-          {
-            "name": "Cadastrar Responsável",
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "url": {
-                "raw": "{{base_url}}/responsaveis",
-                "host": ["{{base_url}}"],
-                "path": ["responsaveis"]
-              },
-              "body": {
-                "mode": "raw",
-                "raw": "{\n    \"nome\": \"Nome do Responsável\",\n    \"telefone\": \"(11) 99999-9999\",\n    \"email\": \"responsavel@example.com\",\n    \"senha\": \"senha123\"\n}"
-              }
-            }
-          },
           {
             "name": "Buscar Perfil Responsável",
             "request": {
