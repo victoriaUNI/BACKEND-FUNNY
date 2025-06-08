@@ -58,6 +58,80 @@ const login = async (req, res) => {
     }
 };
 
+const getSession = async (req, res) => {
+    try {
+        // Verifica se o usuário está autenticado através do token
+        const userId = req.usuario.id;
+        
+        const result = await pool.query(
+            `SELECT r.id, r.nome, u.email 
+             FROM usuarios u 
+             INNER JOIN responsaveis r ON r.usuario_id = u.id 
+             WHERE r.id = $1`,
+            [userId]
+        );
+
+        if (!result.rows[0]) {
+            return res.status(404).json({ error: 'Sessão não encontrada' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Erro ao buscar sessão:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+};
+
+const updatePassword = async (req, res) => {
+    try {
+        const userId = req.usuario.id;
+        const { senha_atual, nova_senha } = req.body;
+
+        // Busca o usuário no banco
+        const result = await pool.query(
+            'SELECT senha FROM usuarios WHERE id = $1',
+            [userId]
+        );
+
+        if (!result.rows[0]) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Verifica se a senha atual está correta
+        if (senha_atual !== result.rows[0].senha) { // Em produção, use bcrypt
+            return res.status(401).json({ error: 'Senha atual incorreta' });
+        }
+
+        // Atualiza a senha
+        await pool.query(
+            'UPDATE usuarios SET senha = $1 WHERE id = $2',
+            [nova_senha, userId] // Em produção, use bcrypt para hash
+        );
+
+        res.json({ message: 'Senha atualizada com sucesso' });
+    } catch (error) {
+        console.error('Erro ao atualizar senha:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+};
+
+const logout = async (req, res) => {
+    try {
+        // Em uma implementação real, você poderia:
+        // 1. Adicionar o token a uma lista negra
+        // 2. Limpar cookies/storage do cliente
+        // 3. Invalidar a sessão no servidor
+        
+        res.json({ message: 'Logout realizado com sucesso' });
+    } catch (error) {
+        console.error('Erro ao fazer logout:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+};
+
 module.exports = {
-    login
+    login,
+    getSession,
+    updatePassword,
+    logout
 };

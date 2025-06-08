@@ -3,6 +3,18 @@
       "name": "BACKEND-FUNNY API",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "https://backend-funny.vercel.app",
+        "type": "string"
+      },
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6InZpYyIsImVtYWlsIjoieW91ci1lbWFpbEBleGFtcGxlLmNvbSIsImlhdCI6MTc0OTQxNTUwOSwiZXhwIjoxNzQ5NTAxOTA5fQ.5sUgXetzNDTgJ6i06VTMLJy9pDRZIyGurBqYm_2VlLs",
+        "type": "string"
+      }
+    ],
     "item": [
       {
         "name": "Auth",
@@ -298,18 +310,6 @@
             }
           }
         ]
-      }
-    ],
-    "variable": [
-      {
-        "key": "base_url",
-        "value": "http://localhost:3000",
-        "type": "string"
-      },
-      {
-        "key": "token",
-        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6InZpYyIsImVtYWlsIjoieW91ci1lbWFpbEBleGFtcGxlLmNvbSIsImlhdCI6MTc0OTQxNTUwOSwiZXhwIjoxNzQ5NTAxOTA5fQ.5sUgXetzNDTgJ6i06VTMLJy9pDRZIyGurBqYm_2VlLs",
-        "type": "string"
       }
     ]
   }

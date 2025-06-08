@@ -21,3 +21,33 @@ exports.listar = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.atualizar = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const crianca = await Crianca.atualizar(id, req.body);
+    
+    if (!crianca) {
+      return res.status(404).json({ error: 'Criança não encontrada' });
+    }
+
+    res.json(crianca);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.remover = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const removido = await Crianca.remover(id);
+    
+    if (!removido) {
+      return res.status(404).json({ error: 'Criança não encontrada' });
+    }
+
+    res.json({ message: 'Criança removida com sucesso' });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -54,6 +54,35 @@ exports.listar = async (req, res) => {
   }
 };
 
+exports.atualizar = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { titulo, descricao, tipo } = req.body;
+
+    // Validações básicas
+    if (!titulo || !tipo) {
+      return res.status(400).json({ error: 'Título e tipo são obrigatórios' });
+    }
+
+    const result = await pool.query(
+      `UPDATE atividades 
+       SET titulo = $1, descricao = $2, tipo = $3
+       WHERE id = $4
+       RETURNING *`,
+      [titulo, descricao, tipo, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Atividade não encontrada' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Erro ao atualizar atividade:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+};
+
 exports.remover = async (req, res) => {
   try {
     const { id } = req.params;

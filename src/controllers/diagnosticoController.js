@@ -23,3 +23,36 @@ exports.listar = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.atualizar = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const diagnostico = await Diagnostico.atualizar(id, {
+      ...req.body,
+      profissional_id: req.usuario.id
+    });
+    
+    if (!diagnostico) {
+      return res.status(404).json({ error: 'Diagnóstico não encontrado' });
+    }
+
+    res.json(diagnostico);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.remover = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const removido = await Diagnostico.remover(id);
+    
+    if (!removido) {
+      return res.status(404).json({ error: 'Diagnóstico não encontrado' });
+    }
+
+    res.json({ message: 'Diagnóstico removido com sucesso' });
+  } catch (error) {
+    next(error);
+  }
+};
