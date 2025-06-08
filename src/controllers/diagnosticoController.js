@@ -13,3 +13,13 @@ exports.criar = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.listar = async (req, res, next) => {
+  try {
+    const { crianca_id } = req.params;
+    const diagnosticos = await Diagnostico.buscarPorCrianca(crianca_id);
+    res.json(diagnosticos);
+  } catch (error) {
+    next(error);
+  }
+};

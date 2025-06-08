@@ -12,3 +12,13 @@ exports.registrar = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.listar = async (req, res, next) => {
+  try {
+    const { crianca_id } = req.params;
+    const progressos = await Progresso.listarPorCrianca(crianca_id);
+    res.json(progressos);
+  } catch (error) {
+    next(error);
+  }
+};

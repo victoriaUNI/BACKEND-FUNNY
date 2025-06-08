@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -14,12 +13,12 @@ app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Rotas
-app.use('/auth', require(path.join(__dirname, 'routes', 'authRoutes')));
-app.use('/responsaveis', require(path.join(__dirname, 'routes', 'responsavelRoutes')));
-app.use('/criancas', require(path.join(__dirname, 'routes', 'criancaRoutes')));
-app.use('/atividades', require(path.join(__dirname, 'routes', 'atividadeRoutes')));
-app.use('/diagnosticos', require(path.join(__dirname, 'routes', 'diagnosticoRoutes')));
-app.use('/progressos', require(path.join(__dirname, 'routes', 'progressoRoutes')));
+app.use('/auth', require('./routes/authRoutes'));
+app.use('/responsaveis', require('./routes/responsavelRoutes'));
+app.use('/criancas', require('./routes/criancaRoutes'));
+app.use('/atividades', require('./routes/atividadeRoutes'));
+app.use('/diagnosticos', require('./routes/diagnosticoRoutes'));
+app.use('/progressos', require('./routes/progressoRoutes'));
 
 // Health Check
 app.get('/', (req, res) => {
@@ -30,6 +29,12 @@ app.get('/', (req, res) => {
 app.use((err, req, res, next) => {
   console.error('❌ ERRO:', err.message);
   res.status(500).json({ error: 'Erro interno' });
+});
+
+// Configuração da porta e inicialização do servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
 
 module.exports = app;
