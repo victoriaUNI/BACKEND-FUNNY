@@ -5,5 +5,5 @@ const criancaController = require(path.join(__dirname, '..', 'controllers', 'cri
 const { authMiddleware } = require(path.join(__dirname, '..', 'middlewares', 'auth'));
 
 router.post('/', authMiddleware, criancaController.criar);
-router.get('/responsavel/:responsavel_id', authMiddleware, criancaController.listar);
+router.get('/', authMiddleware, criancaController.listar);
 module.exports = router;

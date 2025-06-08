@@ -3,7 +3,10 @@ const Crianca = require(path.join(__dirname, '..', 'models', 'criancaModel'));
 
 exports.criar = async (req, res, next) => {
   try {
-    const crianca = await Crianca.criar(req.body);
+    const crianca = await Crianca.criar({
+      ...req.body,
+      responsavel_id: req.usuario.id
+    });
     res.status(201).json(crianca);
   } catch (error) {
     next(error);
@@ -12,7 +15,7 @@ exports.criar = async (req, res, next) => {
 
 exports.listar = async (req, res, next) => {
   try {
-    const criancas = await Crianca.listarPorResponsavel(req.params.responsavel_id);
+    const criancas = await Crianca.listarPorResponsavel(req.usuario.id);
     res.json(criancas);
   } catch (error) {
     next(error);

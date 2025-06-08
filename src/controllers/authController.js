@@ -10,9 +10,12 @@ const login = async (req, res) => {
             return res.status(400).json({ error: 'Email e senha são obrigatórios' });
         }
 
-        // Busca o responsável no banco de dados
+        // Busca o usuário e responsável no banco de dados
         const result = await pool.query(
-            'SELECT id, nome, email, senha FROM responsaveis WHERE email = $1',
+            `SELECT r.id, r.nome, u.email, u.senha 
+             FROM usuarios u 
+             INNER JOIN responsaveis r ON r.usuario_id = u.id 
+             WHERE u.email = $1`,
             [email]
         );
 

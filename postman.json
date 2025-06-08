@@ -1,0 +1,336 @@
+{
+    "info": {
+      "name": "BACKEND-FUNNY API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Auth",
+        "item": [
+          {
+            "name": "Login",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/auth/login",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "login"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"email\": \"seu_email@exemplo.com\",\n    \"senha\": \"sua_senha\"\n}"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Responsável",
+        "item": [
+          {
+            "name": "Cadastrar Responsável",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/responsavel",
+                "host": ["{{base_url}}"],
+                "path": ["responsavel"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"nome\": \"Nome do Responsável\",\n    \"telefone\": \"123456789\",\n    \"email\": \"seu_email@exemplo.com\",\n    \"senha\": \"sua_senha\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Buscar Perfil Responsável",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/responsavel/me",
+                "host": ["{{base_url}}"],
+                "path": ["responsavel", "me"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Criança",
+        "item": [
+          {
+            "name": "Criar Criança",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/crianca",
+                "host": ["{{base_url}}"],
+                "path": ["crianca"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"nome\": \"Nome da Criança\",\n    \"data_nascimento\": \"2018-01-01\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Listar Crianças",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/crianca",
+                "host": ["{{base_url}}"],
+                "path": ["crianca"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Atividades",
+        "item": [
+          {
+            "name": "Criar Atividade",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/atividade/crianca/:crianca_id",
+                "host": ["{{base_url}}"],
+                "path": ["atividade", "crianca", ":crianca_id"],
+                "variable": [
+                  {
+                    "key": "crianca_id",
+                    "value": "1"
+                  }
+                ]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"titulo\": \"Nome da Atividade\",\n    \"descricao\": \"Descrição da atividade\",\n    \"tipo\": \"tipo_da_atividade\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Listar Atividades",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/atividade/crianca/:crianca_id",
+                "host": ["{{base_url}}"],
+                "path": ["atividade", "crianca", ":crianca_id"],
+                "variable": [
+                  {
+                    "key": "crianca_id",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Remover Atividade",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/atividade/:id",
+                "host": ["{{base_url}}"],
+                "path": ["atividade", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Progresso",
+        "item": [
+          {
+            "name": "Registrar Progresso",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/progresso/crianca/:crianca_id",
+                "host": ["{{base_url}}"],
+                "path": ["progresso", "crianca", ":crianca_id"],
+                "variable": [
+                  {
+                    "key": "crianca_id",
+                    "value": "1"
+                  }
+                ]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"atividade_id\": 1,\n    \"pontuacao\": 10,\n    \"observacoes\": \"Observações sobre o progresso\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Listar Progressos",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/progresso/crianca/:crianca_id",
+                "host": ["{{base_url}}"],
+                "path": ["progresso", "crianca", ":crianca_id"],
+                "variable": [
+                  {
+                    "key": "crianca_id",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Diagnóstico",
+        "item": [
+          {
+            "name": "Criar Diagnóstico",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/diagnostico/crianca/:crianca_id",
+                "host": ["{{base_url}}"],
+                "path": ["diagnostico", "crianca", ":crianca_id"],
+                "variable": [
+                  {
+                    "key": "crianca_id",
+                    "value": "1"
+                  }
+                ]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"descricao\": \"Descrição do diagnóstico\",\n    \"data\": \"2024-03-20\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Listar Diagnósticos",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/diagnostico/crianca/:crianca_id",
+                "host": ["{{base_url}}"],
+                "path": ["diagnostico", "crianca", ":crianca_id"],
+                "variable": [
+                  {
+                    "key": "crianca_id",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://localhost:3000",
+        "type": "string"
+      },
+      {
+        "key": "token",
+        "value": "seu_token_jwt_aqui",
+        "type": "string"
+      }
+    ]
+  }
