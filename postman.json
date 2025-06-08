@@ -39,6 +39,65 @@
                 "raw": "{\n    \"email\": \"your-email@example.com\",\n    \"senha\": \"sua_senha\"\n}"
               }
             }
+          },
+          {
+            "name": "Get Session",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/auth/session",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "session"]
+              }
+            }
+          },
+          {
+            "name": "Update Password",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/auth/password",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "password"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"senha_atual\": \"senha_atual\",\n    \"nova_senha\": \"nova_senha\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Logout",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/auth/logout",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "logout"]
+              }
+            }
           }
         ]
       },
@@ -46,9 +105,72 @@
         "name": "Responsável",
         "item": [
           {
+            "name": "Cadastrar Responsável",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/responsaveis",
+                "host": ["{{base_url}}"],
+                "path": ["responsaveis"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"nome\": \"Nome do Responsável\",\n    \"telefone\": \"(11) 99999-9999\",\n    \"email\": \"responsavel@example.com\",\n    \"senha\": \"senha123\"\n}"
+              }
+            }
+          },
+          {
             "name": "Buscar Perfil Responsável",
             "request": {
               "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/responsaveis/me",
+                "host": ["{{base_url}}"],
+                "path": ["responsaveis", "me"]
+              }
+            }
+          },
+          {
+            "name": "Atualizar Responsável",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/responsaveis/me",
+                "host": ["{{base_url}}"],
+                "path": ["responsaveis", "me"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"nome\": \"Novo Nome\",\n    \"telefone\": \"(11) 88888-8888\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Remover Responsável",
+            "request": {
+              "method": "DELETE",
               "header": [
                 {
                   "key": "Authorization",
@@ -88,7 +210,7 @@
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"nome\": \"João\",\n    \"data_nascimento\": \"2018-01-01\"\n}"
+                "raw": "{\n    \"nome\": \"Nome da Criança\",\n    \"data_nascimento\": \"2018-01-01\"\n}"
               }
             }
           },
@@ -106,6 +228,60 @@
                 "raw": "{{base_url}}/criancas",
                 "host": ["{{base_url}}"],
                 "path": ["criancas"]
+              }
+            }
+          },
+          {
+            "name": "Atualizar Criança",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/criancas/:id",
+                "host": ["{{base_url}}"],
+                "path": ["criancas", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"nome\": \"Novo Nome da Criança\",\n    \"data_nascimento\": \"2018-01-01\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Remover Criança",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/criancas/:id",
+                "host": ["{{base_url}}"],
+                "path": ["criancas", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
               }
             }
           }
@@ -165,6 +341,37 @@
                     "value": "1"
                   }
                 ]
+              }
+            }
+          },
+          {
+            "name": "Atualizar Atividade",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/atividades/:id",
+                "host": ["{{base_url}}"],
+                "path": ["atividades", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"titulo\": \"Novo Título\",\n    \"descricao\": \"Nova descrição\",\n    \"tipo\": \"novo_tipo\"\n}"
               }
             }
           },
@@ -249,6 +456,60 @@
                 ]
               }
             }
+          },
+          {
+            "name": "Atualizar Progresso",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/progressos/:id",
+                "host": ["{{base_url}}"],
+                "path": ["progressos", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"pontuacao\": 8,\n    \"observacoes\": \"Atualização do progresso\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Remover Progresso",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/progressos/:id",
+                "host": ["{{base_url}}"],
+                "path": ["progressos", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
           }
         ]
       },
@@ -282,7 +543,7 @@
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"descricao\": \"Diagnóstico de teste\",\n    \"data\": \"2024-03-20\"\n}"
+                "raw": "{\n    \"descricao\": \"Diagnóstico inicial\",\n    \"recomendacoes\": \"Recomendações iniciais\"\n}"
               }
             }
           },
@@ -308,8 +569,62 @@
                 ]
               }
             }
+          },
+          {
+            "name": "Atualizar Diagnóstico",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/diagnosticos/:id",
+                "host": ["{{base_url}}"],
+                "path": ["diagnosticos", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"descricao\": \"Diagnóstico atualizado\",\n    \"recomendacoes\": \"Novas recomendações\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Remover Diagnóstico",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/diagnosticos/:id",
+                "host": ["{{base_url}}"],
+                "path": ["diagnosticos", ":id"],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
           }
         ]
       }
     ]
-  }
+}
