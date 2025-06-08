@@ -1,11 +1,20 @@
 {
   "version": 2,
-  "builds": [{
-    "src": "src/app.js",
-    "use": "@vercel/node"
-  }],
-  "routes": [{
-    "src": "/(.*)",
-    "dest": "src/app.js"
-  }]
+  "builds": [
+    {
+      "src": "src/app.js",
+      "use": "@vercel/node",
+      "config": { 
+        "includeFiles": ["src/**"],
+        "maxLambdaSize": "50mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/app.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    }
+  ]
 }
