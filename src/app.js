@@ -1,22 +1,15 @@
-console.log('🔄 Ambiente:', process.env.NODE_ENV);
-console.log('🔗 DB Host:', process.env.DATABASE_URL?.split('@')[1]?.split('/')[0]);
-
-// Middleware de erro detalhado
-app.use((err, req, res, next) => {
-  console.error('❌ ERRO:', err.message);
-  console.error('📌 Stack:', err.stack);
-  res.status(500).json({ error: 'Erro interno' });
-});
-
 const express = require('express');
 const cors = require('cors');
 const app = express();
+
+// Logs iniciais (após inicialização do app)
+console.log('🔄 Ambiente:', process.env.NODE_ENV);
+console.log('🔗 DB Host:', process.env.DATABASE_URL?.split('@')[1]?.split('/')[0]);
+
+// Middlewares (CORRETO: cors() apenas uma vez)
 app.use(cors({
   origin: '*' // Ou seus domínios específicos
 }));
-
-// Middlewares
-app.use(cors());
 app.use(express.json());
 
 // Rotas
@@ -32,6 +25,11 @@ app.get('/', (req, res) => {
   res.json({ status: 'API Funny está funcionando!' });
 });
 
-
+// Middleware de erro (DEVE SER O ÚLTIMO - após todas as rotas)
+app.use((err, req, res, next) => {
+  console.error('❌ ERRO:', err.message);
+  console.error('📌 Stack:', err.stack);
+  res.status(500).json({ error: 'Erro interno' });
+});
 
 module.exports = app;
