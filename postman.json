@@ -24,7 +24,7 @@
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"email\": \"seu_email@exemplo.com\",\n    \"senha\": \"sua_senha\"\n}"
+                "raw": "{\n    \"email\": \"your-email@example.com\",\n    \"senha\": \"sua_senha\"\n}"
               }
             }
           }
@@ -33,27 +33,6 @@
       {
         "name": "Responsável",
         "item": [
-          {
-            "name": "Cadastrar Responsável",
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "url": {
-                "raw": "{{base_url}}/responsavel",
-                "host": ["{{base_url}}"],
-                "path": ["responsavel"]
-              },
-              "body": {
-                "mode": "raw",
-                "raw": "{\n    \"nome\": \"Nome do Responsável\",\n    \"telefone\": \"123456789\",\n    \"email\": \"seu_email@exemplo.com\",\n    \"senha\": \"sua_senha\"\n}"
-              }
-            }
-          },
           {
             "name": "Buscar Perfil Responsável",
             "request": {
@@ -65,9 +44,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/responsavel/me",
+                "raw": "{{base_url}}/responsaveis/me",
                 "host": ["{{base_url}}"],
-                "path": ["responsavel", "me"]
+                "path": ["responsaveis", "me"]
               }
             }
           }
@@ -91,13 +70,13 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/crianca",
+                "raw": "{{base_url}}/criancas",
                 "host": ["{{base_url}}"],
-                "path": ["crianca"]
+                "path": ["criancas"]
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"nome\": \"Nome da Criança\",\n    \"data_nascimento\": \"2018-01-01\"\n}"
+                "raw": "{\n    \"nome\": \"João\",\n    \"data_nascimento\": \"2018-01-01\"\n}"
               }
             }
           },
@@ -112,9 +91,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/crianca",
+                "raw": "{{base_url}}/criancas",
                 "host": ["{{base_url}}"],
-                "path": ["crianca"]
+                "path": ["criancas"]
               }
             }
           }
@@ -138,9 +117,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/atividade/crianca/:crianca_id",
+                "raw": "{{base_url}}/atividades/crianca/:crianca_id",
                 "host": ["{{base_url}}"],
-                "path": ["atividade", "crianca", ":crianca_id"],
+                "path": ["atividades", "crianca", ":crianca_id"],
                 "variable": [
                   {
                     "key": "crianca_id",
@@ -150,7 +129,7 @@
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"titulo\": \"Nome da Atividade\",\n    \"descricao\": \"Descrição da atividade\",\n    \"tipo\": \"tipo_da_atividade\"\n}"
+                "raw": "{\n    \"titulo\": \"Atividade de Teste\",\n    \"descricao\": \"Descrição da atividade de teste\",\n    \"tipo\": \"teste\"\n}"
               }
             }
           },
@@ -165,9 +144,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/atividade/crianca/:crianca_id",
+                "raw": "{{base_url}}/atividades/crianca/:crianca_id",
                 "host": ["{{base_url}}"],
-                "path": ["atividade", "crianca", ":crianca_id"],
+                "path": ["atividades", "crianca", ":crianca_id"],
                 "variable": [
                   {
                     "key": "crianca_id",
@@ -188,9 +167,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/atividade/:id",
+                "raw": "{{base_url}}/atividades/:id",
                 "host": ["{{base_url}}"],
-                "path": ["atividade", ":id"],
+                "path": ["atividades", ":id"],
                 "variable": [
                   {
                     "key": "id",
@@ -220,9 +199,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/progresso/crianca/:crianca_id",
+                "raw": "{{base_url}}/progressos/crianca/:crianca_id",
                 "host": ["{{base_url}}"],
-                "path": ["progresso", "crianca", ":crianca_id"],
+                "path": ["progressos", "crianca", ":crianca_id"],
                 "variable": [
                   {
                     "key": "crianca_id",
@@ -232,7 +211,7 @@
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"atividade_id\": 1,\n    \"pontuacao\": 10,\n    \"observacoes\": \"Observações sobre o progresso\"\n}"
+                "raw": "{\n    \"atividade_id\": 1,\n    \"pontuacao\": 10,\n    \"observacoes\": \"Teste de progresso\"\n}"
               }
             }
           },
@@ -247,9 +226,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/progresso/crianca/:crianca_id",
+                "raw": "{{base_url}}/progressos/crianca/:crianca_id",
                 "host": ["{{base_url}}"],
-                "path": ["progresso", "crianca", ":crianca_id"],
+                "path": ["progressos", "crianca", ":crianca_id"],
                 "variable": [
                   {
                     "key": "crianca_id",
@@ -279,9 +258,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/diagnostico/crianca/:crianca_id",
+                "raw": "{{base_url}}/diagnosticos/crianca/:crianca_id",
                 "host": ["{{base_url}}"],
-                "path": ["diagnostico", "crianca", ":crianca_id"],
+                "path": ["diagnosticos", "crianca", ":crianca_id"],
                 "variable": [
                   {
                     "key": "crianca_id",
@@ -291,7 +270,7 @@
               },
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"descricao\": \"Descrição do diagnóstico\",\n    \"data\": \"2024-03-20\"\n}"
+                "raw": "{\n    \"descricao\": \"Diagnóstico de teste\",\n    \"data\": \"2024-03-20\"\n}"
               }
             }
           },
@@ -306,9 +285,9 @@
                 }
               ],
               "url": {
-                "raw": "{{base_url}}/diagnostico/crianca/:crianca_id",
+                "raw": "{{base_url}}/diagnosticos/crianca/:crianca_id",
                 "host": ["{{base_url}}"],
-                "path": ["diagnostico", "crianca", ":crianca_id"],
+                "path": ["diagnosticos", "crianca", ":crianca_id"],
                 "variable": [
                   {
                     "key": "crianca_id",
@@ -329,7 +308,7 @@
       },
       {
         "key": "token",
-        "value": "seu_token_jwt_aqui",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6InZpYyIsImVtYWlsIjoieW91ci1lbWFpbEBleGFtcGxlLmNvbSIsImlhdCI6MTc0OTQxNTUwOSwiZXhwIjoxNzQ5NTAxOTA5fQ.5sUgXetzNDTgJ6i06VTMLJy9pDRZIyGurBqYm_2VlLs",
         "type": "string"
       }
     ]
