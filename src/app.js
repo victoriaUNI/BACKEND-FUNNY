@@ -21,13 +21,9 @@ app.use('/responsaveis', require('./routes/responsavelRoutes'));
 
 // Health Check
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'API esta funcionando' });
+  res.json({ status: 'API Funny está funcionando!' });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Algo deu errado!' });
-});
+
 
 module.exports = app;
