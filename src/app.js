@@ -1,3 +1,5 @@
+console.log('🔄 Ambiente:', process.env.NODE_ENV);
+console.log('🔗 DB Host:', process.env.DATABASE_URL?.split('@')[1]?.split('/')[0]);
 const express = require('express');
 const cors = require('cors');
 const app = express();

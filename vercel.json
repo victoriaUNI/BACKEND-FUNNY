@@ -2,10 +2,10 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/app.js",
+      "src": "vercel.js",
       "use": "@vercel/node",
-      "config": { 
-        "includeFiles": ["src/**"],
+      "config": {
+        "includeFiles": ["src/**", ".env"],
         "maxLambdaSize": "50mb"
       }
     }
@@ -13,8 +13,8 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/app.js",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
+      "dest": "vercel.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
     }
   ]
 }
