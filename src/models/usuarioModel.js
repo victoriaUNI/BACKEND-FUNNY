@@ -1,7 +1,7 @@
 const db = require('../src/database/db');
 
 class Usuario {
-  static async criar({ email, senha, tipo }) {
+  static async criar(email, senha, tipo) {
     const { rows } = await db.query(
       `INSERT INTO usuarios (email, senha, tipo) 
        VALUES ($1, $2, $3) RETURNING *`,

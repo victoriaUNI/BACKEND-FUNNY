@@ -1,4 +1,5 @@
-const db = require('../srcdatabase/db');
+const path = require('path');
+const db = require(path.join(__dirname, '..', 'database', 'db'));
 
 class Responsavel {
   static async criar({ nome, telefone, usuario_id }) {
@@ -12,7 +13,7 @@ class Responsavel {
 
   static async buscarPorUsuario(usuario_id) {
     const { rows } = await db.query(
-      'SELECT * FROM responsaveis WHERE usuario_id = $1',
+      'SELECT * FROM responsaveis WHERE usuario_id = $1', 
       [usuario_id]
     );
     return rows[0];

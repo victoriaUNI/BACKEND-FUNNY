@@ -1,17 +1,18 @@
+const path = require('path');
 const jwt = require('jsonwebtoken');
+const Usuario = require(path.join(__dirname, '..', 'models', 'usuarioModel'));
 
-module.exports = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  
-  if (!token) {
-    return res.status(401).json({ erro: 'Token não fornecido' });
-  }
-
+module.exports = async (req, res, next) => {
   try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new Error('Token não fornecido');
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.usuario = decoded;
+    req.usuario = await Usuario.buscarPorId(decoded.id);
+    
     next();
   } catch (error) {
-    res.status(401).json({ erro: 'Token inválido' });
+    console.error('Erro de autenticação:', error.message);
+    res.status(401).json({ error: 'Não autorizado' });
   }
 };

@@ -1,21 +1,23 @@
-const Crianca = require('../models/Crianca');
+const path = require('path');
+const Atividade = require(path.join(__dirname, '..', 'models', 'atividadeModel'));
 
-module.exports = {
-  async criar(req, res) {
-    try {
-      const crianca = await Crianca.criar(req.body);
-      res.status(201).json(crianca);
-    } catch (error) {
-      res.status(400).json({ erro: error.message });
-    }
-  },
+exports.criar = async (req, res, next) => {
+  try {
+    const atividade = await Atividade.criar({
+      ...req.body,
+      crianca_id: req.params.crianca_id
+    });
+    res.status(201).json(atividade);
+  } catch (error) {
+    next(error);
+  }
+};
 
-  async listarPorResponsavel(req, res) {
-    try {
-      const criancas = await Crianca.listarPorResponsavel(req.params.responsavel_id);
-      res.json(criancas);
-    } catch (error) {
-      res.status(500).json({ erro: error.message });
-    }
+exports.listar = async (req, res, next) => {
+  try {
+    const atividades = await Atividade.listarPorCrianca(req.params.crianca_id);
+    res.json(atividades);
+  } catch (error) {
+    next(error);
   }
 };

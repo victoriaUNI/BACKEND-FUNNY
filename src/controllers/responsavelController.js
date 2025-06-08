@@ -1,42 +1,23 @@
-const Responsavel = require('../src/models/Responsavel');
-const Usuario = require('../src/models/Usuario');
+const path = require('path');
+const Responsavel = require(path.join(__dirname, '..', 'models', 'responsavelModel'));
+const Usuario = require(path.join(__dirname, '..', 'models', 'usuarioModel'));
 
-module.exports = {
-  async cadastrar(req, res) {
-    try {
-      // Primeiro cria o usuário
-      const usuario = await Usuario.criar({
-        email: req.body.email,
-        senha: req.body.senha,
-        tipo: 'responsavel'
-      });
+exports.cadastrar = async (req, res, next) => {
+  try {
+    const { nome, telefone, email, senha } = req.body;
+    const usuario = await Usuario.criar(email, senha, 'responsavel');
+    const responsavel = await Responsavel.criar({ nome, telefone, usuario_id: usuario.id });
+    res.status(201).json(responsavel);
+  } catch (error) {
+    next(error);
+  }
+};
 
-      // Depois cria o responsável vinculado
-      const responsavel = await Responsavel.criar({
-        nome: req.body.nome,
-        telefone: req.body.telefone,
-        usuario_id: usuario.id
-      });
-
-      res.status(201).json({
-        id: responsavel.id,
-        nome: responsavel.nome,
-        email: usuario.email
-      });
-    } catch (error) {
-      res.status(400).json({ erro: error.message });
-    }
-  },
-
-  async buscar(req, res) {
-    try {
-      const responsavel = await Responsavel.buscarPorUsuario(req.usuario.id);
-      if (!responsavel) {
-        return res.status(404).json({ erro: 'Responsável não encontrado' });
-      }
-      res.json(responsavel);
-    } catch (error) {
-      res.status(500).json({ erro: error.message });
-    }
+exports.buscar = async (req, res, next) => {
+  try {
+    const responsavel = await Responsavel.buscarPorUsuario(req.usuario.id);
+    res.json(responsavel);
+  } catch (error) {
+    next(error);
   }
 };

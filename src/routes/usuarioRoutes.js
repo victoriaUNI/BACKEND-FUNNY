@@ -1,10 +1,10 @@
+const path = require('path');
 const express = require('express');
 const router = express.Router();
-const diagnosticoController = require('..Src/controllers/diagnosticoController');
-const authMiddleware = require('../middlewares/auth');
-const isProfissional = require('../middlewares/isProfissional');
+const usuarioController = require(path.join(__dirname, '..', 'controllers', 'usuarioController'));
+const authMiddleware = require(path.join(__dirname, '..', 'middlewares', 'auth'));
 
-router.post('/crianca/:crianca_id', authMiddleware, isProfissional, diagnosticoController.criar);
-router.get('/crianca/:crianca_id', authMiddleware, diagnosticoController.listar);
+router.post('/registro', usuarioController.registrar);
+router.get('/perfil', authMiddleware, usuarioController.buscarPerfil);
 
 module.exports = router;

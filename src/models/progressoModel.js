@@ -1,4 +1,5 @@
-const db = require('../src/database/db');
+const path = require('path');
+const db = require(path.join(__dirname, '..', 'database', 'db'));
 
 class Progresso {
   static async registrar({ crianca_id, habilidade, nivel }) {

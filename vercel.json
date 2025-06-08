@@ -1,16 +1,18 @@
 {
   "version": 2,
-  "builds": [{
-    "src": "src/app.js",
-    "use": "@vercel/node",
-    "config": {
-      "maxLambdaSize": "50mb",
-      "includeFiles": ["src/**"]
+  "builds": [
+    {
+      "src": "src/app.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["src/**"]
+      }
     }
-  }],
-  "routes": [{
-    "src": "/(.*)",
-    "dest": "src/app.js",
-    "continue": true
-  }]
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/app.js"
+    }
+  ]
 }
