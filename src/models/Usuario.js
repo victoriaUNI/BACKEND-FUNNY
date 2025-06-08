@@ -1,4 +1,5 @@
-const db = require('../srcdatabase/db');
+const path = require('path');
+const db = require(path.join(__dirname, '..', 'database', 'db'));
 
 class Usuario {
   static async criar({ email, senha, tipo }) {
