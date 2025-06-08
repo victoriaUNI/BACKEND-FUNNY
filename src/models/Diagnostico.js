@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('../src/database/db');
 
 class Diagnostico {
   static async criar({ crianca_id, observacoes, profissional_id }) {

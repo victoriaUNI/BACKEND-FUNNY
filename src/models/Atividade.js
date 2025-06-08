@@ -1,4 +1,4 @@
-const db = require('../../database/db');
+const db = require('../src/database/db');
 
 class Atividade {
   static async criar({ titulo, descricao, data_inicio, data_fim, status, usuario_id }) {

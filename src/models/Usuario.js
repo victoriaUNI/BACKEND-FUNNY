@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('../srcdatabase/db');
 
 class Usuario {
   static async criar({ email, senha, tipo }) {

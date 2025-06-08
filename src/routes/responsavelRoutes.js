@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const responsavelController = require('../controllers/responsavelController');
+const responsavelController = require('../src/controllers/responsavelController');
 const authMiddleware = require('../middlewares/auth');
 
 // Cadastro público (sem autenticação)

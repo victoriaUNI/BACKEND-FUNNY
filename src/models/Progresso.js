@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('../src/database/db');
 
 class Progresso {
   static async registrar({ crianca_id, habilidade, nivel }) {

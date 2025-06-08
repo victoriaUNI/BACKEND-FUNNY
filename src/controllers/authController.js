@@ -1,4 +1,4 @@
-const Usuario = require('./models/Usuario');
+const Usuario = require('../src/models/Usuario');
 const jwt = require('jsonwebtoken');
 
 module.exports = {

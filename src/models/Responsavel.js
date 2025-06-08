@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('../srcdatabase/db');
 
 class Responsavel {
   static async criar({ nome, telefone, usuario_id }) {
